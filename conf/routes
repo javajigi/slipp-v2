@@ -1,0 +1,42 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Admin Page
+*    	/admin    								module:crudsiena
+
+# Home page
+GET     /                                       Threads.list
+GET 	/keepalived								Application.keepalived
+
+# AttachedFiles
+GET		/{serviceType}/{<[0-9]+>id}/attachments/{name} 		AttachedFiles.showImage
+
+# Threads
+GET     /threads/tagged/{tagName}							Threads.tagged
+GET 	/threads/upload										Threads.upload
+GET 	/threads/rss/{tagName}								Threads.rss
+GET		/threads/delete/{<[0-9]+>id}						Threads.delete
+GET     /threads/{<[0-9]+>id}/answers/{<[0-9]+>answerId}   	Threads.updateAnswerForm
+GET     /threads/{<[0-9]+>id}                 				Threads.show
+GET     /threads/form/{tagName}		          				Threads.createForm
+GET     /threads/form			             				Threads.createForm
+GET     /threads/{<[0-9]+>id}/form		        			Threads.updateForm
+POST    /threads/{<[0-9]+>id}/answers/{<[0-9]+>answerId}   	Threads.updateAnswer
+POST	/threads/{<[0-9]+>id}								Threads.save
+POST	/threads											Threads.save
+
+# Answers
+
+# Tags
+GET		/tags/by								Tags.findsByName
+GET		/tags/init								Tags.init
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}
