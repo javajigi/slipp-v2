@@ -1,12 +1,11 @@
 package controllers;
 
-import java.util.List;
-
-import models.Auth;
-
+import play.modules.gae.GAE;
 import play.mvc.Controller;
 import play.mvc.With;
+import supports.web.Check;
 import supports.web.GAESecure;
+import supports.web.Role;
 
 @With(GAESecure.class)
 public class Application extends Controller {
@@ -22,11 +21,12 @@ public class Application extends Controller {
     	render();
     }
 
+    @Check(Role.ROLE_USER)
     public static void login() {
-        Auth.login("Threads.list");
+    	Threads.list(1);
     }
  
     public static void logout() {
-        Auth.logout("Threads.list");
+    	GAE.logout("Threads.list");
     }
 }
