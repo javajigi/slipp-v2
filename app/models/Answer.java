@@ -104,11 +104,11 @@ public class Answer extends Model {
 	
 	public Boolean checkModifyRole(SlippUser loginUser) throws HasNotRoleException {
 		if (loginUser==null) {
-			throw new HasNotRoleException("이 쓰레드의 상태를 변경할 수 있는 권한이 없습니다.");
+			throw new HasNotRoleException("답글을 수정할 수 있는 권한이 없습니다.");
 		}
 		
 		if (!user.equals(loginUser)) {
-			throw new HasNotRoleException("이 쓰레드의 상태를 변경할 수 있는 권한이 없습니다.");
+			throw new HasNotRoleException("답글을 수정할 수 있는 권한이 없습니다.");
 		}
 		
 		return Boolean.TRUE;

@@ -42,8 +42,8 @@
 .comment .commentList .cont { float:left; width:770px; margin:0 35px 0 0; word-break:break-all; word-wrap:break-word; color:#000000  }
 .comment .commentList .cont a { color:#6d8da5 }
 .comment .commentList .cont-support { float:left; width:770px; margin:0 35px 0 0; word-break:break-all; word-wrap:break-word; color:#000000  }
-.comment .commentList .button-answer { width:615px; float:left;}
+.comment .commentList .button-answer { width:585px; float:left;}
 .comment .commentList .button-answer a { margin:10px 0 10px 5px; background: url(/public/images/img02.gif) repeat-x left top; padding: 1px 10px; text-decoration: none; font-size: 14px;	color: #FFFFFF; }
-.comment .commentList .user-info { float:left; width:120px; overflow:hidden; }
+.comment .commentList .user-info { float:left; width:150px; overflow:hidden; }
 .comment .commentList .user-nickname { display:block; margin:0 10px 10px 10px; color:#545454; font-size:14px }
 .comment .commentList .user-action-time { display:block; margin:0 10px 0 10px; color:#545454; font-size:14px }
