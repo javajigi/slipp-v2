@@ -129,7 +129,7 @@ public class Thread extends Model {
 	}
 	
 	public List<Answer> getAnswers() {
-		return answers.fetch();
+		return answers.order("createdDate").fetch();
 	}
 
 	static Query<Thread> all(){
