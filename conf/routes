@@ -8,6 +8,8 @@
 # Home page
 GET     /                                       Threads.list
 GET 	/keepalived								Application.keepalived
+GET 	/about									Application.about
+GET 	/code									Application.code
 
 # AttachedFiles
 GET		/{serviceType}/{<[0-9]+>id}/attachments/{name} 		AttachedFiles.showImage

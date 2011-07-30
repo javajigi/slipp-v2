@@ -34,21 +34,6 @@ h2 {
 	line-height: 26px;	
 }
 
-.idea-post {
-	margin-bottom: 20px;
-	border-bottom: 1px dashed #D1D1D1;
-}
-
-.idea-post p {
-	margin: 0 0 0 0;
-	text-align: justify;
-	line-height: 26px;	
-}
-
-.idea-post .entry a {
-	color: #000000;
-}
-
 img {
 	border: none;
 }
@@ -179,6 +164,16 @@ input, textarea, select {
 	float: left;
 	width: 800px;
 	padding: 30px 0 0 30px;
+}
+
+#content li.section {
+	padding:8px 0px 8px 0px;
+	border-bottom:3px solid #6f6f6f; 
+	list-style: none;
+}
+
+#content li.section h2{
+	padding:15px 0px 15px 0px;
 }
 
 /* Post */

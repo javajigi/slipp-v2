@@ -17,6 +17,10 @@ public class Application extends Controller {
     public static void about() {
     	render();
     }
+    
+    public static void code() {
+    	render();
+    }
 
     public static void login() {
         Auth.login("Threads.list");
