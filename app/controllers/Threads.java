@@ -77,6 +77,7 @@ public class Threads extends Controller {
 			for (Tag tag : tags) {
 				thread.tag(tag);
 			}
+			show(thread.getId(), null);
 		} else {
 			Thread thread = getThread(id);
 			List<Tag> tags = null;
@@ -93,8 +94,8 @@ public class Threads extends Controller {
 				renderArgs.put("errorMessage", e.getMessage());
 				render("Threads/form.html", thread);
 			}
+			show(id, null);
 		}
-		list(DEFAULT_PAGE_NO);
 	}
 	
 	public static void show(Long id, String errorMessage) {
