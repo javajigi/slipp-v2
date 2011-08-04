@@ -3,9 +3,9 @@ import org.junit.Test;
 
 import play.mvc.Http.Response;
 
-public class ApplicationTest extends AbstractFunctionalTest {
+public class ThreadsTest extends AbstractFunctionalTest {
     @Test
-    public void testThatIndexPageWorks() {
+    public void testThatListPageWorks() {
         Response response = GET("/");
         assertIsOk(response);
         assertContentType("text/html", response);

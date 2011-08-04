@@ -1,0 +1,32 @@
+*{ You can use plain selenium command using the selenium tag }*
+* http://seleniumhq.org/docs/02_selenium_ide.html reference syntax
+* http://release.seleniumhq.org/selenium-core/1.0.1/reference.html
+
+#{selenium}
+	* 정상적인 글쓰기
+    open('/application/logout')
+    assertTitle('SLiPP :: sustainable life, programming, programmer')
+    clickAndWait('link=로그인')
+    type('email', 'javajigi@gmail.com')
+    clickAndWait('//input[@value='Sign in !']')
+    clickAndWait('link=글쓰기')
+    type('title', '지속가능한 삶, 프로그래밍, 프로그래머')
+    type('contents', '정말 좋은 곳. 내가 만들고 싶은 것은 바로 이런 것이었어.')
+    type('tagnames', 'java 개발일지')
+    clickAndWait('//input[@value='질문하기']')
+    verifyTitle('SLiPP :: 지속가능한 삶, 프로그래밍, 프로그래머')
+    verifyTextPresent('지속가능한 삶, 프로그래밍, 프로그래머')
+    
+    * 제목, 컨텐츠, 태그가 없을 때
+    clickAndWait('link=SLiPP')
+    clickAndWait('link=글쓰기')
+    click('//input[@value='질문하기']')
+    verifyTextPresent('제목을 입력하세요.')
+    verifyTextPresent('내용을 입력하세요.')
+    verifyTextPresent('컨텐츠의 체계적인 관리를 위하여 태그를 하나 이상 입력하세요.')
+    
+    * 태그를 통해 글쓰기 접근했을 때
+    clickAndWait('link=개발일지')
+    clickAndWait('link=글쓰기')
+    verifyValue('tagnames', '개발일지')
+#{/selenium}
