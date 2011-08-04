@@ -107,6 +107,15 @@ public class ThreadTest extends AbstractDomainTest {
 		assertThat(tags, is(Arrays.asList(tag1, tag2)));
 	}
 	
+	@Test
+	public void updateShowCount() throws Exception {
+		Thread thread = createThread();
+		Thread showThread = Thread.show(thread.getId());
+		assertThat(showThread.getShowCount(), is(1));
+		showThread = Thread.show(thread.getId());
+		assertThat(showThread.getShowCount(), is(2));
+	}
+	
 	static Thread createThread() {
 		SlippUser user = SlippUserTest.user1();
 		return createThread(user);

@@ -40,6 +40,8 @@ public class Thread extends Model {
 
 	private int answerCount;
 
+	private int showCount;
+
 	public Thread() {}
 	
 	public Thread(Long id) {
@@ -87,6 +89,10 @@ public class Thread extends Model {
 	
 	public int getAnswerCount() {
 		return answerCount;
+	}
+	
+	public int getShowCount() {
+		return showCount;
 	}
 	
 	public void modify(SlippUser modifiedUser, String title, String contents, Date modifiedDate, List<Tag> tags) throws HasNotRoleException {
@@ -179,6 +185,14 @@ public class Thread extends Model {
 	
 	public boolean hasAnswer() {
 		return answerCount > 0;
+	}
+	
+	public static Thread show(Long id) {
+		Thread thread = findById(id);
+		Logger.debug("id : %s, showCount : %s", id, thread.getShowCount());
+		thread.showCount = thread.getShowCount() + 1;
+		thread.update();
+		return thread;
 	}
 	
 	public void deleteAll() {

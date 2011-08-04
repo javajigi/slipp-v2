@@ -99,7 +99,7 @@ public class Threads extends Controller {
 	}
 	
 	public static void show(Long id, String errorMessage) {
-		Thread thread = getThread(id);
+		Thread thread = Thread.show(id);
 		List<Answer> answers = thread.getAnswers();
 		List<Tag> sortedTags = Tag.findByTaggedCount();
 		render(thread, answers, sortedTags, errorMessage);
