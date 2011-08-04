@@ -1,0 +1,12 @@
+*{ You can use plain selenium command using the selenium tag }*
+* http://seleniumhq.org/docs/02_selenium_ide.html reference syntax
+* http://release.seleniumhq.org/selenium-core/1.0.1/reference.html
+
+#{selenium}
+	setSpeed(500)
+    open('/application/logout')
+    assertTitle('SLiPP :: sustainable life, programming, programmer')
+    clickAndWait('link=로그인')
+    type('email', 'javajigi@gmail.com')
+    clickAndWait('//input[@value='Sign in !']')
+#{/selenium}
