@@ -24,6 +24,7 @@ GET     /threads/{<[0-9]+>id}                 				Threads.show
 GET     /threads/form/{tagName}		          				Threads.createForm
 GET     /threads/form			             				Threads.createForm
 GET     /threads/{<[0-9]+>id}/form		        			Threads.updateForm
+GET		/threads/preview									Threads.preview
 POST    /threads/{<[0-9]+>id}/answers/{<[0-9]+>answerId}   	Threads.updateAnswer
 POST	/threads/{<[0-9]+>id}								Threads.save
 POST	/threads											Threads.save

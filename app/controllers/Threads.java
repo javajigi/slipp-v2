@@ -17,6 +17,7 @@ import supports.Pager;
 import supports.web.Check;
 import supports.web.GAESecure;
 import supports.web.Role;
+import supports.wiki.WikiContents;
 
 @With(GAESecure.class)
 public class Threads extends Controller {
@@ -171,6 +172,12 @@ public class Threads extends Controller {
 			show(id, e.getMessage());
 		}
 		show(id, null);
+	}
+	
+	public static void preview(String data) {
+		Logger.debug("preview data : %s", data);
+		String previewData = WikiContents.convert(data);
+		render(previewData);
 	}
 	
 	private static Thread getThread(Long id) {

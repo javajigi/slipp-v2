@@ -11,7 +11,7 @@
 // Feel free to add more tags
 // -------------------------------------------------------------------
 mySettings = {
-	previewParserPath:	'', // path to your Textile parser
+	previewParserPath:	'/threads/preview', // path to your Textile parser
 	onShiftEnter:		{keepDefault:false, replaceWith:'\n\n'},
 	markupSet: [
 		{name:'Heading 1', key:'1', openWith:'h1(!(([![Class]!]))!). ', placeHolder:'Your title here...' },
@@ -34,6 +34,6 @@ mySettings = {
 			beforeInsert:function(markItUp){InlineUpload.display(markItUp)}}, 
 		{name:'Link', openWith:'"', closeWith:'([![Title]!])":[![Link:!:http://]!]', placeHolder:'Your text to link here...' },
 		{separator:'---------------' },
-		{name:'Quotes', openWith:'bq(!(([![Class]!]))!). '}
+		{name:'Preview', call:'preview', className:'preview'}
 	]
 }
