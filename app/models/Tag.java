@@ -26,6 +26,9 @@ import com.google.appengine.api.memcache.MemcacheServiceFactory;
 public class Tag extends Model implements Serializable {
 	private static final long serialVersionUID = 5261972132949700085L;
 	
+	public static final String SORTED_TAGS_CACHE_KEY = Tag.class.getName() + "_CACHE_KEY";
+	public static MemcacheService ms = MemcacheServiceFactory.getMemcacheService();
+	
 	@Id(Generator.AUTO_INCREMENT)
 	public Long id;
 	
@@ -99,15 +102,19 @@ public class Tag extends Model implements Serializable {
 	}
 	
 	public static List<Tag> findByTaggedCount() {
-		MemcacheService ms = MemcacheServiceFactory.getMemcacheService();
-		String sortedTagsKey = "sortedTags";
-		Object sortedTags = ms.get(sortedTagsKey);
+		Object sortedTags = ms.get(SORTED_TAGS_CACHE_KEY);
 		if (sortedTags != null){
 			return (List<Tag>)sortedTags;
 		}
 		
 		Logger.debug("create new sortedtags!!");
 		
+		List<Tag> newTags = findSortedTags();
+		ms.put(SORTED_TAGS_CACHE_KEY, newTags);
+		return newTags;
+	}
+
+	public static List<Tag> findSortedTags() {
 		List<Tag> tags = all().filter("parent", null).order("-taggedCount").fetch();
 		List<Tag> newTags = new ArrayList<Tag>();
 		for (Tag tag : tags) {
@@ -115,7 +122,6 @@ public class Tag extends Model implements Serializable {
 				newTags.add(tag);
 			}
 		}
-		ms.put(sortedTagsKey, newTags);
 		return newTags;
 	}
 	

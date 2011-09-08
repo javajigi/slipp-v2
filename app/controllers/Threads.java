@@ -3,6 +3,9 @@ package controllers;
 import java.util.Date;
 import java.util.List;
 
+import com.google.appengine.api.memcache.MemcacheService;
+import com.google.appengine.api.memcache.MemcacheServiceFactory;
+
 import models.Answer;
 import models.Auth;
 import models.HasNotRoleException;
@@ -78,6 +81,8 @@ public class Threads extends Controller {
 			for (Tag tag : tags) {
 				thread.tag(tag);
 			}
+			
+			Tag.ms.put(Tag.SORTED_TAGS_CACHE_KEY, Tag.findSortedTags());
 			show(thread.getId(), null);
 		} else {
 			Thread thread = getThread(id);
@@ -95,6 +100,7 @@ public class Threads extends Controller {
 				renderArgs.put("errorMessage", e.getMessage());
 				render("Threads/form.html", thread);
 			}
+			Tag.ms.put(Tag.SORTED_TAGS_CACHE_KEY, Tag.findSortedTags());
 			show(id, null);
 		}
 	}
