@@ -1,13 +1,13 @@
 package models;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
+
+import play.Logger;
 
 public class TagTest extends AbstractDomainTest {
 	@Test
@@ -56,6 +56,9 @@ public class TagTest extends AbstractDomainTest {
 		javascript.update();
 		createTag("spring");
 		List<Tag> tags = Tag.findByTaggedCount();
+		assertThat(tags.size(), is(2));
+		tags = Tag.findByTaggedCount();
+		Logger.debug("SortedTags : " + tags);
 		assertThat(tags.size(), is(2));
 	}
 	

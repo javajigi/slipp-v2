@@ -1,5 +1,6 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +20,12 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.memcache.MemcacheService;
+import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
-public class Tag extends Model {
+public class Tag extends Model implements Serializable {
+	private static final long serialVersionUID = 5261972132949700085L;
+	
 	@Id(Generator.AUTO_INCREMENT)
 	public Long id;
 	
@@ -94,6 +99,15 @@ public class Tag extends Model {
 	}
 	
 	public static List<Tag> findByTaggedCount() {
+		MemcacheService ms = MemcacheServiceFactory.getMemcacheService();
+		String sortedTagsKey = "sortedTags";
+		Object sortedTags = ms.get(sortedTagsKey);
+		if (sortedTags != null){
+			return (List<Tag>)sortedTags;
+		}
+		
+		Logger.debug("create new sortedtags!!");
+		
 		List<Tag> tags = all().filter("parent", null).order("-taggedCount").fetch();
 		List<Tag> newTags = new ArrayList<Tag>();
 		for (Tag tag : tags) {
@@ -101,24 +115,12 @@ public class Tag extends Model {
 				newTags.add(tag);
 			}
 		}
+		ms.put(sortedTagsKey, newTags);
 		return newTags;
 	}
 	
 	public static List<Tag> findsByName(String name) {
 		return all().filter("name>=", name).filter("name<", name+"\uFFFD").fetch();
-//		DatastoreService dataStore = DatastoreServiceFactory.getDatastoreService();
-//		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Tag");
-//		q.addFilter("name", com.google.appengine.api.datastore.Query.FilterOperator.GREATER_THAN_OR_EQUAL, name);
-//		q.addFilter("name", com.google.appengine.api.datastore.Query.FilterOperator.LESS_THAN, name + "\uFFFD");
-//		
-//		PreparedQuery pq = dataStore.prepare(q);
-//		List<Tag> tags = new ArrayList<Tag>();
-//		for(Entity result : pq.asIterable()){
-//			Tag tag = new Tag((Long)result.getProperty("id"), (String)result.getProperty("name"));
-//			tags.add(tag);
-//		}
-//		
-//		return tags;
 	}
 	
 	public static List<Tag> findParents() {

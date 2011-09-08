@@ -9,6 +9,7 @@ import play.test.UnitTest;
 import com.google.appengine.api.datastore.dev.LocalDatastoreService;
 import com.google.appengine.tools.development.ApiProxyLocal;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
+import com.google.appengine.tools.development.testing.LocalMemcacheServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.google.apphosting.api.ApiProxy;
 
@@ -16,6 +17,8 @@ public abstract class AbstractDomainTest extends UnitTest {
 	static final long now = System.currentTimeMillis();
 	
 	protected final LocalServiceTestHelper helper = createLocalServiceTestHelper();
+	protected final LocalServiceTestHelper cacheHelper =
+	        new LocalServiceTestHelper(new LocalMemcacheServiceTestConfig());
 
 	private LocalServiceTestHelper createLocalServiceTestHelper() {
 		LocalDatastoreServiceTestConfig testConfig = new LocalDatastoreServiceTestConfig();
@@ -27,6 +30,7 @@ public abstract class AbstractDomainTest extends UnitTest {
 	@Before
 	public void setup() {
 		helper.setUp();
+		cacheHelper.setUp();
 	}
 	
 	@After
